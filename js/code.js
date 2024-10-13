@@ -14,7 +14,7 @@ const DisplayBilinior = (items) => {
     const miliniorField = document.getElementById('milinior-field');
     items.forEach(element => {
         const div = document.createElement('div');
-        div.className =" flex py-3 justify-between gap-5"
+        div.className = " flex py-3 justify-between gap-5"
         div.innerHTML = `
               <div class=" flex gap-3">
                      <p class="font-semibold">${element.personName}</p>
@@ -23,11 +23,26 @@ const DisplayBilinior = (items) => {
                  <p class="font-semibold">${element.countryOfCitizenship}</p>
                  <p class="font-semibold">${element.industries}</p>
                   <p class="font-semibold">${element.rank}</p>
-                  <p class="font-semibold">$ ${element.finalWorth}</p>
+                  <p  class=" person-wealth font-semibold">$ ${element.finalWorth}</p>
         
         `
         miliniorField.appendChild(div)
     });
 }
+const calculateTotalAmount = () => {
+    const totalAmountField = document.getElementById('total-amount');
+    const personWealth = document.getElementsByClassName('person-wealth');
+    
+    let amount = [];
+    let sum = 0;
+    for (let i = 0; i < personWealth.length; i++) {
+        sum = sum + personWealth[i].innerText;
+        console.log(i);
+        amount.push(sum)
+    }
+    document.getElementById('total-amount').innerText = amount;
+}
 
+
+calculateTotalAmount()
 most10bilinior()
