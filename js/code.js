@@ -6,7 +6,11 @@ htmlTag.setAttribute("data-theme", "light");
 const most10bilinior = () => {
     fetch('https://forbes400.onrender.com/api/forbes400?limit=10')
         .then(res => res.json())
-        .then(data => DisplayBilinior(data))
+        .then(data => {
+            DisplayBilinior(data)
+            calculateTotalAmount()
+        })
+
 }
 
 // randomly show them
@@ -32,17 +36,17 @@ const DisplayBilinior = (items) => {
 const calculateTotalAmount = () => {
     const totalAmountField = document.getElementById('total-amount');
     const personWealth = document.getElementsByClassName('person-wealth');
-    
-    let amount = [];
     let sum = 0;
-    for (let i = 0; i < personWealth.length; i++) {
-        sum = sum + personWealth[i].innerText;
-        console.log(i);
-        amount.push(sum)
+
+    for (const item of personWealth) {
+        const value = parseFloat(item.innerText.split('$').join(''));
+        console.log(value);
+        if (!isNaN(value)) {
+            sum += value
+        }
     }
-    document.getElementById('total-amount').innerText = amount;
+    document.getElementById('total-amount').innerText = '$ ' + sum.toFixed(2);
 }
 
 
-calculateTotalAmount()
 most10bilinior()
